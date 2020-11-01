@@ -77,9 +77,25 @@ macro IsPerpendicular x1, y1, x2, y2, x3, y3, x4, y4 {
       cmp eax, 0
       local ..PerpendicularFound
       je ..PerpendicularFound
+
+      mov eax, [x4]
+      sub eax, [x3]
+      mov ecx, [x2]
+      sub ecx, [x1]
+      imul ecx
+      mov ebx, [y4]
+      sub ebx, [y3]
+      mov edx, [y2]
+      sub edx, [y1]
+      imul edx
+      add eax, ebx
+      cmp eax, 0
+      je ..PerpendicularFound
+
       mov esp, [tmpStack]
       local ..Over
       jmp ..Over
+
 ..PerpendicularFound:
         cinvoke printf, perpMes1               ; Пара, состоящая из отрезока с координатами концевых точек: (
         cinvoke printf, digit, dword [x1]
