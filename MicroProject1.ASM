@@ -32,6 +32,7 @@ section '.data' data readable writable
         repEnter db 'The wrong coordinates input. Entered coordinate have to be less than -10^6 and more than 10^6.', 10, 13, 0
         tryAgain db 'Try again: ', 0
         digit db '%d', 0
+        tab db " ", 0
 
         c11          dd ?
         c12          dd ?
