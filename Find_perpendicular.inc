@@ -63,36 +63,29 @@ macro FindPerpendicular c11, c12, c13, c14, c21, c22, c23, c24, c31, c32, c33, c
 ;--------------------------------------------------------------------------
 macro IsPerpendicular x1, y1, x2, y2, x3, y3, x4, y4 {
       mov [tmpStack], esp
+
       mov eax, [x2]
       sub eax, [x1]
-      mov ecx, [x4]
-      sub ecx, [x3]
-      imul ecx
-      mov ebx, [y2]
-      sub ebx, [y1]
-      mov edx, [y4]
-      sub edx, [y3]
-      imul edx
-      add eax, ebx
+      mov ebx, [x4]
+      sub ebx, [x3]
+      mov edx, 0
+      imul ebx
+      mov ecx, eax
+
+      mov eax, [y2]
+      sub eax, [y1]
+      mov ebx, [y4]
+      sub ebx, [y3]
+      mov edx, 0
+      imul ebx
+
+      add eax, ecx
       cmp eax, 0
       local ..PerpendicularFound
       je ..PerpendicularFound
 
-      mov eax, [x4]
-      sub eax, [x3]
-      mov ecx, [x2]
-      sub ecx, [x1]
-      imul ecx
-      mov ebx, [y4]
-      sub ebx, [y3]
-      mov edx, [y2]
-      sub edx, [y1]
-      imul edx
-      add eax, ebx
-      cmp eax, 0
-      je ..PerpendicularFound
-
       mov esp, [tmpStack]
+
       local ..Over
       jmp ..Over
 
